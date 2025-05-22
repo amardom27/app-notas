@@ -12,16 +12,12 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 /**
  *
  * @author alvaro
  */
 @Entity
-@Table(name = "cliente")
+@Table(name = "usuarios")
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
     @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nomUsuario = :nomUsuario")
@@ -50,6 +46,11 @@ public class Usuario implements Serializable {
 
     public Usuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
+    }
+    
+    public Usuario(String nomUsuario, String passUsuario) {
+        this.nomUsuario = nomUsuario;
+        this.passUsuario = passUsuario;
     }
 
     public Usuario(Integer idUsuario, String nomUsuario, String passUsuario) {

@@ -11,6 +11,6 @@ package daw;
 public class AppNotas {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        servicios.UsuarioService.insertarEjemplo();
     }
 }
