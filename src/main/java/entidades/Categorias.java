@@ -48,6 +48,10 @@ public class Categorias implements Serializable {
 
     public Categorias() {
     }
+    
+    public Categorias(String nombre) {
+        this.nombre = nombre;
+    }
 
     public Categorias(Integer idCategoria) {
         this.idCategoria = idCategoria;

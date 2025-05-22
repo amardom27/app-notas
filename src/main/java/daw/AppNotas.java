@@ -11,6 +11,6 @@ package daw;
 public class AppNotas {
 
     public static void main(String[] args) {
-        servicios.UsuariosService.insertarEjemplo();
+        servicios.CategoriasService.insertarEjemplo();
     }
 }
