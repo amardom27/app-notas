@@ -1,0 +1,138 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package entidades;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+/**
+ *
+ * @author alvaro
+ */
+@Entity
+@Table(name = "notas")
+@NamedQueries({
+    @NamedQuery(name = "Notas.findAll", query = "SELECT n FROM Notas n"),
+    @NamedQuery(name = "Notas.findByIdNota", query = "SELECT n FROM Notas n WHERE n.idNota = :idNota"),
+    @NamedQuery(name = "Notas.findByTitulo", query = "SELECT n FROM Notas n WHERE n.titulo = :titulo"),
+    @NamedQuery(name = "Notas.findByDescripcion", query = "SELECT n FROM Notas n WHERE n.descripcion = :descripcion"),
+    @NamedQuery(name = "Notas.findByFechaCreacion", query = "SELECT n FROM Notas n WHERE n.fechaCreacion = :fechaCreacion")})
+public class Notas implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idNota")
+    private Integer idNota;
+    @Column(name = "titulo")
+    private String titulo;
+    @Column(name = "descripcion")
+    private String descripcion;
+    @Column(name = "fechaCreacion")
+    @Temporal(TemporalType.DATE)
+    private Date fechaCreacion;
+    @ManyToMany(mappedBy = "notasList")
+    private List<Categorias> categoriasList;
+    @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
+    @ManyToOne
+    private Usuarios idUsuario;
+
+    public Notas() {
+    }
+
+    public Notas(Integer idNota) {
+        this.idNota = idNota;
+    }
+
+    public Integer getIdNota() {
+        return idNota;
+    }
+
+    public void setIdNota(Integer idNota) {
+        this.idNota = idNota;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public List<Categorias> getCategoriasList() {
+        return categoriasList;
+    }
+
+    public void setCategoriasList(List<Categorias> categoriasList) {
+        this.categoriasList = categoriasList;
+    }
+
+    public Usuarios getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Usuarios idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idNota != null ? idNota.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Notas)) {
+            return false;
+        }
+        Notas other = (Notas) object;
+        if ((this.idNota == null && other.idNota != null) || (this.idNota != null && !this.idNota.equals(other.idNota))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "entidades.Notas[ idNota=" + idNota + " ]";
+    }
+    
+}

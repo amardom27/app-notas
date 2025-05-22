@@ -3,6 +3,9 @@
   <persistence-unit name="notas" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>entidades.Usuario</class>
+    <class>entidades.Notas</class>
+    <class>entidades.Categorias</class>
+    <class>entidades.Usuarios</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/BDnotas?serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="admin"/>

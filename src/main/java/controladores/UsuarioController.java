@@ -1,6 +1,6 @@
 package controladores;
 
-import entidades.Usuario;
+import entidades.Usuarios;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -30,7 +30,7 @@ public class UsuarioController {
      *
      * @param usuario El usuario a crear.
      */
-    public void create(Usuario usuario) {
+    public void create(Usuarios usuario) {
         EntityManager em = getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
@@ -53,10 +53,10 @@ public class UsuarioController {
      * @param id El ID del usuario.
      * @return El usuario encontrado o null si no existe.
      */
-    public Usuario findById(Integer id) {
+    public Usuarios findById(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Usuario.class, id);
+            return em.find(Usuarios.class, id);
         } finally {
             em.close();
         }
@@ -67,10 +67,10 @@ public class UsuarioController {
      *
      * @return Una lista de usuarios.
      */
-    public List<Usuario> findAll() {
+    public List<Usuarios> findAll() {
         EntityManager em = getEntityManager();
         try {
-            return em.createNamedQuery("Usuario.findAll", Usuario.class).getResultList();
+            return em.createNamedQuery("Usuario.findAll", Usuarios.class).getResultList();
         } finally {
             em.close();
         }
@@ -82,12 +82,12 @@ public class UsuarioController {
      * @param nombre El nombre de usuario.
      * @return El usuario encontrado o null si no existe.
      */
-    public Usuario findByNombre(String nombre) {
+    public Usuarios findByNombre(String nombre) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Usuario> query = em.createNamedQuery("Usuario.findByNombre", Usuario.class);
+            TypedQuery<Usuarios> query = em.createNamedQuery("Usuario.findByNombre", Usuarios.class);
             query.setParameter("nomUsuario", nombre);
-            List<Usuario> resultados = query.getResultList();
+            List<Usuarios> resultados = query.getResultList();
             return resultados.isEmpty() ? null : resultados.get(0);
         } finally {
             em.close();
@@ -99,7 +99,7 @@ public class UsuarioController {
      *
      * @param usuario El usuario a actualizar.
      */
-    public void update(Usuario usuario) {
+    public void update(Usuarios usuario) {
         EntityManager em = getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
@@ -126,7 +126,7 @@ public class UsuarioController {
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
-            Usuario usuario = em.find(Usuario.class, id);
+            Usuarios usuario = em.find(Usuarios.class, id);
             if (usuario != null) {
                 em.remove(usuario);
             }
