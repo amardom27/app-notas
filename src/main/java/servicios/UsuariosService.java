@@ -4,7 +4,7 @@
  */
 package servicios;
 
-import controladores.UsuarioController;
+import controladores.UsuariosController;
 import entidades.Usuarios;
 import java.util.ArrayList;
 
@@ -12,9 +12,9 @@ import java.util.ArrayList;
  *
  * @author alvaro
  */
-public class UsuarioService {
+public class UsuariosService {
     
-    private static final UsuarioController uc = new UsuarioController();
+    private static final UsuariosController uc = new UsuariosController();
     
     public static void insertarEjemplo() {
         var lista = new ArrayList<Usuarios>();

@@ -12,11 +12,11 @@ import javax.persistence.TypedQuery;
  *
  * @author alvaro
  */
-public class UsuarioController {
+public class UsuariosController {
 
     private final EntityManagerFactory emf;
 
-    public UsuarioController() {
+    public UsuariosController() {
         // Nombre de la unidad de persistencia definido en persistence.xml
         this.emf = Persistence.createEntityManagerFactory("notas");
     }
