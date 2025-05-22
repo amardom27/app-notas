@@ -31,7 +31,7 @@ create table notas(
 drop table if exists categorias;
 create table categorias(
 	idCategoria int auto_increment,
-    nombre varchar(20),
+    nombre varchar(20) unique,
     constraint pk_categorias primary key (idCategoria)
 );
 
