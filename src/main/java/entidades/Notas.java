@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -50,7 +51,12 @@ public class Notas implements Serializable {
     @Column(name = "fechaCreacion")
     @Temporal(TemporalType.DATE)
     private Date fechaCreacion;
-    @ManyToMany(mappedBy = "notasList")
+    @ManyToMany
+    @JoinTable(
+            name = "detNotasCategorias",
+            joinColumns = @JoinColumn(name = "idNota"),
+            inverseJoinColumns = @JoinColumn(name = "idCategoria")
+    )
     private List<Categorias> categoriasList;
     @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
     @ManyToOne
@@ -137,5 +143,5 @@ public class Notas implements Serializable {
     public String toString() {
         return "entidades.Notas[ idNota=" + idNota + " ]";
     }
-    
+
 }

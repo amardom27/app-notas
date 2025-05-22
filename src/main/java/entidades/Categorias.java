@@ -13,8 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -40,15 +38,12 @@ public class Categorias implements Serializable {
     private Integer idCategoria;
     @Column(name = "nombre")
     private String nombre;
-    @JoinTable(name = "detNotasCategorias", joinColumns = {
-        @JoinColumn(name = "idCategoria", referencedColumnName = "idCategoria")}, inverseJoinColumns = {
-        @JoinColumn(name = "idNota", referencedColumnName = "idNota")})
-    @ManyToMany
+    @ManyToMany(mappedBy = "categoriasList")
     private List<Notas> notasList;
 
     public Categorias() {
     }
-    
+
     public Categorias(String nombre) {
         this.nombre = nombre;
     }
@@ -107,5 +102,5 @@ public class Categorias implements Serializable {
     public String toString() {
         return "entidades.Categorias[ idCategoria=" + idCategoria + " ]";
     }
-    
+
 }
