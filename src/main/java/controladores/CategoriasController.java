@@ -127,6 +127,9 @@ public class CategoriasController {
             tx.begin();
             Categorias categoria = em.find(Categorias.class, id);
             if (categoria != null) {
+                // Eliminar la relación con las notas
+                categoria.getNotasList().forEach(nota -> nota.getCategoriasList().remove(categoria));
+                categoria.getNotasList().clear();
                 em.remove(categoria);
             }
             tx.commit();
@@ -141,13 +144,16 @@ public class CategoriasController {
     }
 
     /**
-     * Elimina todas las categorías de la base de datos y reinicia el autoincremento.
+     * Elimina todas las categorías de la base de datos y reinicia el
+     * autoincremento.
      */
     public void deleteAll() {
         EntityManager em = getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
+            em.createNativeQuery("DELETE FROM detNotasCategorias").executeUpdate();
+            em.createNativeQuery("DELETE FROM categorias").executeUpdate();
             em.createNativeQuery("DELETE FROM categorias").executeUpdate();
             em.createNativeQuery("ALTER TABLE categorias AUTO_INCREMENT = 1").executeUpdate();
             tx.commit();

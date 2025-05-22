@@ -1,7 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-
 package daw;
 
 /**
@@ -11,6 +10,8 @@ package daw;
 public class AppNotas {
 
     public static void main(String[] args) {
-        servicios.CategoriasService.insertarEjemplo();
+        servicios.NotasService.insertarEjemplo3();
+        servicios.NotasService.insertarEjemplo4();
+
     }
 }
