@@ -7,6 +7,7 @@ package entidades;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -112,22 +113,24 @@ public class Notas implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (idNota != null ? idNota.hashCode() : 0);
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.idNota);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Notas)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Notas other = (Notas) object;
-        if ((this.idNota == null && other.idNota != null) || (this.idNota != null && !this.idNota.equals(other.idNota))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Notas other = (Notas) obj;
+        return Objects.equals(this.idNota, other.idNota);
     }
 
     @Override

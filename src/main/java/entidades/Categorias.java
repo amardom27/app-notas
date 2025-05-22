@@ -6,6 +6,7 @@ package entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -78,22 +79,24 @@ public class Categorias implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (idCategoria != null ? idCategoria.hashCode() : 0);
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.idCategoria);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Categorias)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Categorias other = (Categorias) object;
-        if ((this.idCategoria == null && other.idCategoria != null) || (this.idCategoria != null && !this.idCategoria.equals(other.idCategoria))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Categorias other = (Categorias) obj;
+        return Objects.equals(this.idCategoria, other.idCategoria);
     }
 
     @Override
