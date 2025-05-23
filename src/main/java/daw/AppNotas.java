@@ -10,8 +10,5 @@ package daw;
 public class AppNotas {
 
     public static void main(String[] args) {
-        servicios.NotasService.insertarEjemplo3();
-        servicios.NotasService.insertarEjemplo4();
-
     }
 }

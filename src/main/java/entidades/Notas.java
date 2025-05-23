@@ -64,6 +64,12 @@ public class Notas implements Serializable {
 
     public Notas() {
     }
+    
+    public Notas(Integer id, String titulo, String descripcion) {
+        this.idNota = id;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+    }
 
     public Notas(Integer idNota) {
         this.idNota = idNota;

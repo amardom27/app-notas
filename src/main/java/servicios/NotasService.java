@@ -25,6 +25,15 @@ public class NotasService {
     private static final UsuariosController usuariosController = new UsuariosController();
     private static final CategoriasController categoriasController = new CategoriasController();
 
+    public static List<Notas> obtenerNotas() {
+        List<Notas> lista = notasController.findAll();
+        return lista;
+    }
+    
+    public static void modificarNota(Notas nota) {
+        notasController.updateContenido(nota);
+    }
+
     public static void insertarEjemplo() {
         // Crear o buscar usuario
         Usuarios usuario = new Usuarios();
@@ -110,7 +119,7 @@ public class NotasService {
             return;
         }
 
-        System.out.println("Notas asociadas a la categoría '" + categoria.getNombre()+ "':");
+        System.out.println("Notas asociadas a la categoría '" + categoria.getNombre() + "':");
         List<Notas> notas = categoria.getNotasList();
         if (notas == null || notas.isEmpty()) {
             System.out.println("  - No hay notas asociadas.");

@@ -135,6 +135,36 @@ public class NotasController {
         }
     }
 
+    public void updateContenido(Notas nota) {
+        EntityManager em = getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        try {
+            tx.begin();
+
+            // Buscar la nota existente por su ID
+            Notas notaExistente = em.find(Notas.class, nota.getIdNota());
+            if (notaExistente == null) {
+                throw new IllegalArgumentException("Nota no encontrada con ID: " + nota.getIdNota());
+            }
+
+            // Actualizar solo el título y la descripción
+            notaExistente.setTitulo(nota.getTitulo());
+            notaExistente.setDescripcion(nota.getDescripcion());
+
+            em.merge(notaExistente);
+
+            tx.commit();
+        } catch (IllegalArgumentException ex) {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException("Error al actualizar la nota", ex);
+        } finally {
+            em.close();
+        }
+    }
+
     /**
      * Elimina una nota (y su relación con categorías).
      *
