@@ -3,6 +3,9 @@
  */
 package daw;
 
+import vistas.LoginDialog;
+import vistas.VentanaPrincipal;
+
 /**
  *
  * @author alvaro
@@ -10,5 +13,15 @@ package daw;
 public class AppNotas {
 
     public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(() -> {
+            LoginDialog login = new LoginDialog(null, true);
+            login.setVisible(true); // bloquea hasta que el login se cierre
+
+            if (login.isLoginExitoso()) {
+                new VentanaPrincipal().setVisible(true);
+            } else {
+                System.exit(0); // o simplemente no haces nada
+            }
+        });
     }
 }

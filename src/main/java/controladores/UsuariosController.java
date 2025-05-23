@@ -94,6 +94,22 @@ public class UsuariosController {
         }
     }
 
+    public Usuarios findByNombreYContrasena(String nombreUsuario, String passUsuario) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Usuarios> query = em.createQuery(
+                    "SELECT u FROM Usuarios u WHERE u.nomUsuario = :nombre AND u.passUsuario = :pass",
+                    Usuarios.class
+            );
+            query.setParameter("nombre", nombreUsuario);
+            query.setParameter("pass", passUsuario);
+            List<Usuarios> resultado = query.getResultList();
+            return resultado.isEmpty() ? null : resultado.get(0);
+        } finally {
+            em.close();
+        }
+    }
+
     /**
      * Actualiza un usuario existente.
      *

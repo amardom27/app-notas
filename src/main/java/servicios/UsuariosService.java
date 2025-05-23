@@ -13,9 +13,9 @@ import java.util.ArrayList;
  * @author alvaro
  */
 public class UsuariosService {
-    
+
     private static final UsuariosController uc = new UsuariosController();
-    
+
     public static void insertarEjemplo() {
         var lista = new ArrayList<Usuarios>();
         lista.add(new Usuarios("pepe", "12345"));
@@ -23,5 +23,10 @@ public class UsuariosService {
         for (Usuarios usuario : lista) {
             uc.create(usuario);
         }
+    }
+
+    public static boolean autenticar(String nombreUsuario, String contraseña) {
+        Usuarios usuario = uc.findByNombreYContrasena(nombreUsuario, contraseña);
+        return usuario != null;
     }
 }

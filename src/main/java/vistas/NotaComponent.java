@@ -116,7 +116,7 @@ public class NotaComponent extends javax.swing.JPanel {
         String contenido = contentField.getText();
         Notas nuevaNota = new Notas(this.notaId, titulo, contenido);
         NotasService.modificarNota(nuevaNota);
-        JOptionPane.showMessageDialog(this, "Nota actualizada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Nota actualizada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void categoriesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriesBtnActionPerformed
