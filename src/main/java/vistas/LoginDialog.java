@@ -4,7 +4,6 @@
  */
 package vistas;
 
-import java.util.Arrays;
 import javax.swing.JOptionPane;
 import servicios.UsuariosService;
 
@@ -18,6 +17,7 @@ public class LoginDialog extends javax.swing.JDialog {
 
     /**
      * Creates new form LoginDialog
+     *
      * @param parent
      * @param modal
      */
@@ -49,7 +49,7 @@ public class LoginDialog extends javax.swing.JDialog {
         signUpBtn = new javax.swing.JButton();
         userField = new javax.swing.JTextField();
         passField = new javax.swing.JPasswordField();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        passCheckbox = new javax.swing.JCheckBox();
         jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -85,10 +85,10 @@ public class LoginDialog extends javax.swing.JDialog {
 
         passField.setText("jPasswordField1");
 
-        jCheckBox1.setText("  Mostrar contraseña");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        passCheckbox.setText("  Mostrar contraseña");
+        passCheckbox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                passCheckboxActionPerformed(evt);
             }
         });
 
@@ -106,9 +106,9 @@ public class LoginDialog extends javax.swing.JDialog {
                     .addComponent(signUpBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                     .addComponent(passField, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(loginBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(userField)
-                    .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2))
+                    .addComponent(passCheckbox, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2)
+                    .addComponent(userField))
                 .addGap(98, 98, 98))
         );
         layout.setVerticalGroup(
@@ -122,7 +122,7 @@ public class LoginDialog extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jCheckBox1)
+                .addComponent(passCheckbox)
                 .addGap(36, 36, 36)
                 .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -133,18 +133,19 @@ public class LoginDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void passCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passCheckboxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+        if (passCheckbox.isSelected()) {
+            passField.setEchoChar((char) 0); // Mostrar contraseña
+        } else {
+            passField.setEchoChar('*'); // Ocultar contraseña
+        }
+    }//GEN-LAST:event_passCheckboxActionPerformed
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
         String usuario = userField.getText();
         String pass = String.valueOf(passField.getPassword());
-        
-        System.out.println(usuario);
-        System.out.println(pass);
-        System.out.println(UsuariosService.autenticar(usuario, pass));
 
         if (UsuariosService.autenticar(usuario, pass)) {
             setLoginExitoso(true);
@@ -156,6 +157,8 @@ public class LoginDialog extends javax.swing.JDialog {
 
     private void signUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpBtnActionPerformed
         // TODO add your handling code here:
+        SignUpDialog signUp = new SignUpDialog((java.awt.Frame) this.getParent(), true); // 'this' es el frame actual como padre
+        signUp.setVisible(true); // Muestra el diálogo de registro
     }//GEN-LAST:event_signUpBtnActionPerformed
 
     /**
@@ -199,10 +202,10 @@ public class LoginDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JButton loginBtn;
+    private javax.swing.JCheckBox passCheckbox;
     private javax.swing.JPasswordField passField;
     private javax.swing.JButton signUpBtn;
     private javax.swing.JTextField userField;

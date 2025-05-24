@@ -7,6 +7,7 @@ package servicios;
 import controladores.UsuariosController;
 import entidades.Usuarios;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,5 +29,14 @@ public class UsuariosService {
     public static boolean autenticar(String nombreUsuario, String contraseña) {
         Usuarios usuario = uc.findByNombreYContrasena(nombreUsuario, contraseña);
         return usuario != null;
+    }
+
+    public static void insertarUsuario(Usuarios usuario) {
+        try {
+            uc.create(usuario);
+            JOptionPane.showMessageDialog(null, "Usuario creado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null, "Error introduciendo al usuario.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

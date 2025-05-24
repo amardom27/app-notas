@@ -30,9 +30,9 @@
                   <Component id="signUpBtn" alignment="0" pref="350" max="32767" attributes="0"/>
                   <Component id="passField" alignment="1" max="32767" attributes="0"/>
                   <Component id="loginBtn" alignment="1" max="32767" attributes="0"/>
-                  <Component id="userField" max="32767" attributes="0"/>
-                  <Component id="jCheckBox1" min="-2" pref="189" max="-2" attributes="0"/>
+                  <Component id="passCheckbox" min="-2" pref="189" max="-2" attributes="0"/>
                   <Component id="jTextField2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="userField" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="98" pref="98" max="-2" attributes="0"/>
           </Group>
@@ -49,7 +49,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="passField" min="-2" pref="45" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+              <Component id="passCheckbox" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               <Component id="loginBtn" min="-2" pref="45" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -106,12 +106,12 @@
         <Property name="text" type="java.lang.String" value="jPasswordField1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+    <Component class="javax.swing.JCheckBox" name="passCheckbox">
       <Properties>
         <Property name="text" type="java.lang.String" value="  Mostrar contrase&#xf1;a"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="passCheckboxActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField2">
