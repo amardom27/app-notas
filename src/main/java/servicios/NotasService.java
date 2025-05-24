@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,8 +31,22 @@ public class NotasService {
         return lista;
     }
     
+    public static List<Notas> obtenerNotasPorUsuario(Integer id) {
+        List<Notas> lista = notasController.findAllByUser(id);
+        return lista;
+    }
+    
     public static void modificarNota(Notas nota) {
         notasController.updateContenido(nota);
+    }
+    
+    public static void agregarNota(Notas nota) {
+        try {
+            notasController.create(nota);
+            JOptionPane.showMessageDialog(null, "Nota creada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null, "Error introduciendo la nota.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public static void insertarEjemplo() {
@@ -53,14 +68,14 @@ public class NotasService {
         nota1.setTitulo("Revisar JavaFX");
         nota1.setDescripcion("Practicar interfaces gráficas en JavaFX");
         nota1.setFechaCreacion(new Date());
-        nota1.setIdUsuario(usuario);
+        nota1.setUsuario(usuario);
         nota1.setCategoriasList(Arrays.asList(cat2)); // asociada a programación
 
         Notas nota2 = new Notas();
         nota2.setTitulo("Ver película");
         nota2.setDescripcion("Ver El Señor de los Anillos");
         nota2.setFechaCreacion(new Date());
-        nota2.setIdUsuario(usuario);
+        nota2.setUsuario(usuario);
         nota2.setCategoriasList(Arrays.asList(cat1)); // asociada a películas
 
         // Guardar notas

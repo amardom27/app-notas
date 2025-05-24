@@ -26,9 +26,9 @@ public class UsuariosService {
         }
     }
 
-    public static boolean autenticar(String nombreUsuario, String contraseña) {
+    public static Usuarios autenticar(String nombreUsuario, String contraseña) {
         Usuarios usuario = uc.findByNombreYContrasena(nombreUsuario, contraseña);
-        return usuario != null;
+        return usuario;
     }
 
     public static void insertarUsuario(Usuarios usuario) {
@@ -38,5 +38,9 @@ public class UsuariosService {
         } catch (RuntimeException e) {
             JOptionPane.showMessageDialog(null, "Error introduciendo al usuario.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    public static Usuarios obtenerUsuarioPorId(Integer id) {
+        return uc.findById(id);
     }
 }

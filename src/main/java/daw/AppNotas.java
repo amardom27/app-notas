@@ -18,7 +18,7 @@ public class AppNotas {
             login.setVisible(true); // bloquea hasta que el login se cierre
 
             if (login.isLoginExitoso()) {
-                new VentanaPrincipal().setVisible(true);
+                new VentanaPrincipal(login.getIdLogin()).setVisible(true);
             } else {
                 System.exit(0); // o simplemente no haces nada
             }

@@ -16,26 +16,29 @@ import servicios.NotasService;
  * @author alvaro
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-
+    
+    private final Integer idLogin;
     /**
      * Creates new form VentanaPrincipal
+     * @param id
      */
-    public VentanaPrincipal() {
+    public VentanaPrincipal(Integer id) {
         initComponents();
         setLocationRelativeTo(null);
+        this.idLogin = id;
 
         // Step 1: Create a container with vertical layout
         JPanel notasContainer = new JPanel();
         notasContainer.setLayout(new BoxLayout(notasContainer, BoxLayout.Y_AXIS));
-        notasContainer.setBackground(java.awt.Color.WHITE); // optional for visibility
-
-        List<Notas> notas = NotasService.obtenerNotas();
+        notasContainer.setBackground(java.awt.Color.GRAY); // optional for visibility
+        
+        List<Notas> notas = NotasService.obtenerNotasPorUsuario(id);
         for (Notas nota : notas) {
             NotaComponent notaComp = new NotaComponent(nota.getIdNota(), nota.getCategoriasList());
             notaComp.setAlignmentX(LEFT_ALIGNMENT); // aligns to the left
             notasContainer.add(notaComp);
             notasContainer.add(Box.createRigidArea(new java.awt.Dimension(0, 20))); // spacing
-            
+
             notaComp.getTitleField().setText(nota.getTitulo());
             notaComp.getContentField().setText(nota.getDescripcion());
         }
@@ -53,22 +56,73 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        addNoteBtn = new javax.swing.JButton();
+        addCategoryBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(java.awt.SystemColor.controlShadow);
 
         jPanel1.setBackground(java.awt.SystemColor.controlShadow);
+
+        addNoteBtn.setText("Agregar Nota");
+        addNoteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addNoteBtnActionPerformed(evt);
+            }
+        });
+
+        addCategoryBtn.setText("Agregar Categoria");
+        addCategoryBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCategoryBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Opciones");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(addCategoryBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                        .addComponent(addNoteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(22, 22, 22))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(addNoteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(addCategoryBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jScrollPane1.setBackground(java.awt.SystemColor.controlShadow);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 736, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 586, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,6 +145,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addNoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNoteBtnActionPerformed
+        // TODO add your handling code here:
+        AddNoteDialog dialog = new AddNoteDialog(this, true, 1);
+        dialog.setLocationRelativeTo(this); // Centrar el diálogo respecto a la ventana principal
+        dialog.setVisible(true);
+    }//GEN-LAST:event_addNoteBtnActionPerformed
+
+    private void addCategoryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCategoryBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addCategoryBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,12 +186,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new VentanaPrincipal().setVisible(true);
+            new VentanaPrincipal(2).setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addCategoryBtn;
+    private javax.swing.JButton addNoteBtn;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

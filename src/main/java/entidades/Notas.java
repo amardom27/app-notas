@@ -60,15 +60,21 @@ public class Notas implements Serializable {
     private List<Categorias> categoriasList;
     @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
     @ManyToOne
-    private Usuarios idUsuario;
+    private Usuarios usuario;
 
     public Notas() {
     }
-    
+
     public Notas(Integer id, String titulo, String descripcion) {
         this.idNota = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
+    }
+
+    public Notas(String titulo, String descripcion, Usuarios usuario) {
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.usuario = usuario;
     }
 
     public Notas(Integer idNota) {
@@ -115,12 +121,12 @@ public class Notas implements Serializable {
         this.categoriasList = categoriasList;
     }
 
-    public Usuarios getIdUsuario() {
-        return idUsuario;
+    public Usuarios getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(Usuarios idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(Usuarios usuario) {
+        this.usuario = usuario;
     }
 
     @Override
@@ -149,5 +155,4 @@ public class Notas implements Serializable {
     public String toString() {
         return "entidades.Notas[ idNota=" + idNota + " ]";
     }
-
 }

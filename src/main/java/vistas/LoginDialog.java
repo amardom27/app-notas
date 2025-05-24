@@ -4,6 +4,7 @@
  */
 package vistas;
 
+import entidades.Usuarios;
 import javax.swing.JOptionPane;
 import servicios.UsuariosService;
 
@@ -14,6 +15,7 @@ import servicios.UsuariosService;
 public class LoginDialog extends javax.swing.JDialog {
 
     private boolean loginExitoso;
+    private Integer idLogin;
 
     /**
      * Creates new form LoginDialog
@@ -146,12 +148,14 @@ public class LoginDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
         String usuario = userField.getText();
         String pass = String.valueOf(passField.getPassword());
+        Usuarios usuarioLogin = UsuariosService.autenticar(usuario, pass);
 
-        if (UsuariosService.autenticar(usuario, pass)) {
-            setLoginExitoso(true);
-            dispose();
+        if (usuarioLogin == null) {
+            JOptionPane.showMessageDialog(null, "El usuario es incorrecto.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
+            setLoginExitoso(true);
+            setIdLogin(usuarioLogin.getIdUsuario());
+            dispose();
         }
     }//GEN-LAST:event_loginBtnActionPerformed
 
@@ -210,4 +214,12 @@ public class LoginDialog extends javax.swing.JDialog {
     private javax.swing.JButton signUpBtn;
     private javax.swing.JTextField userField;
     // End of variables declaration//GEN-END:variables
+
+    public Integer getIdLogin() {
+        return idLogin;
+    }
+
+    private void setIdLogin(Integer idLogin) {
+        this.idLogin = idLogin;
+    }
 }

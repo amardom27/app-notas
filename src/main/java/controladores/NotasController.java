@@ -99,6 +99,20 @@ public class NotasController {
         }
     }
 
+    public List<Notas> findAllByUser(Integer idUsuario) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.createQuery(
+                    "SELECT n FROM Notas n WHERE n.usuario.idUsuario = :idUsuario", Notas.class)
+                    .setParameter("idUsuario", idUsuario)
+                    .getResultList();
+        } catch (Exception ex) {
+            throw new RuntimeException("Error al obtener las notas del usuario con ID: " + idUsuario, ex);
+        } finally {
+            em.close();
+        }
+    }
+
     /**
      * Actualiza una nota (incluye su lista de categorías).
      *
