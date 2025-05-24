@@ -16,34 +16,40 @@ import servicios.NotasService;
  * @author alvaro
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-    
+
     private final Integer idLogin;
+
     /**
      * Creates new form VentanaPrincipal
+     *
      * @param id
      */
     public VentanaPrincipal(Integer id) {
         initComponents();
         setLocationRelativeTo(null);
         this.idLogin = id;
+        cargarNotas();
+    }
 
-        // Step 1: Create a container with vertical layout
+    private void cargarNotas() {
         JPanel notasContainer = new JPanel();
         notasContainer.setLayout(new BoxLayout(notasContainer, BoxLayout.Y_AXIS));
-        notasContainer.setBackground(java.awt.Color.GRAY); // optional for visibility
-        
-        List<Notas> notas = NotasService.obtenerNotasPorUsuario(id);
+        notasContainer.setBackground(java.awt.Color.GRAY); // opcional
+
+        List<Notas> notas = NotasService.obtenerNotasPorUsuario(idLogin);
         for (Notas nota : notas) {
             NotaComponent notaComp = new NotaComponent(nota.getIdNota(), nota.getCategoriasList());
-            notaComp.setAlignmentX(LEFT_ALIGNMENT); // aligns to the left
+            notaComp.setAlignmentX(LEFT_ALIGNMENT);
             notasContainer.add(notaComp);
-            notasContainer.add(Box.createRigidArea(new java.awt.Dimension(0, 20))); // spacing
+            notasContainer.add(Box.createRigidArea(new java.awt.Dimension(0, 20)));
 
             notaComp.getTitleField().setText(nota.getTitulo());
             notaComp.getContentField().setText(nota.getDescripcion());
         }
-        // Step 3: Set the container as scroll pane's view
+
         jScrollPane1.setViewportView(notasContainer);
+        jScrollPane1.revalidate();
+        jScrollPane1.repaint();
     }
 
     /**
@@ -148,9 +154,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void addNoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNoteBtnActionPerformed
         // TODO add your handling code here:
-        AddNoteDialog dialog = new AddNoteDialog(this, true, 1);
+        System.out.println(idLogin);
+        AddNoteDialog dialog = new AddNoteDialog(this, true, this.idLogin);
         dialog.setLocationRelativeTo(this); // Centrar el diálogo respecto a la ventana principal
         dialog.setVisible(true);
+
+        // Cuando el diálogo se cierra, recarga las notas
+        cargarNotas();
     }//GEN-LAST:event_addNoteBtnActionPerformed
 
     private void addCategoryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCategoryBtnActionPerformed
