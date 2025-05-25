@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package vistas;
 
@@ -12,29 +12,14 @@ import servicios.UsuariosService;
  *
  * @author alvaro
  */
-public class LoginDialog extends javax.swing.JDialog {
-
-    private boolean loginExitoso;
-    private Integer idLogin;
+public class LoginFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form LoginDialog
-     *
-     * @param parent
-     * @param modal
+     * Creates new form LoginFrame
      */
-    public LoginDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public LoginFrame() {
         initComponents();
-        setLocationRelativeTo(parent);
-    }
-
-    public boolean isLoginExitoso() {
-        return loginExitoso;
-    }
-
-    private void setLoginExitoso(boolean loginExitoso) {
-        this.loginExitoso = loginExitoso;
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -46,7 +31,6 @@ public class LoginDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         loginBtn = new javax.swing.JButton();
         signUpBtn = new javax.swing.JButton();
         userField = new javax.swing.JTextField();
@@ -55,21 +39,9 @@ public class LoginDialog extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jPanel1.setBackground(java.awt.SystemColor.controlShadow);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         loginBtn.setText("Entrar");
         loginBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -98,6 +70,19 @@ public class LoginDialog extends javax.swing.JDialog {
         jLabel2.setText("Usuario");
 
         jLabel3.setText("Contraseña");
+
+        jPanel1.setBackground(java.awt.SystemColor.controlShadow);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,15 +128,6 @@ public class LoginDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void passCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passCheckboxActionPerformed
-        // TODO add your handling code here:
-        if (passCheckbox.isSelected()) {
-            passField.setEchoChar((char) 0); // Mostrar contraseña
-        } else {
-            passField.setEchoChar('*'); // Ocultar contraseña
-        }
-    }//GEN-LAST:event_passCheckboxActionPerformed
-
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
         String usuario = userField.getText();
@@ -161,9 +137,7 @@ public class LoginDialog extends javax.swing.JDialog {
         if (usuarioLogin == null) {
             JOptionPane.showMessageDialog(null, "El usuario es incorrecto.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            setLoginExitoso(true);
-            setIdLogin(usuarioLogin.getIdUsuario());
-            dispose();
+            new VentanaPrincipal(usuarioLogin.getIdUsuario()).setVisible(true);
         }
     }//GEN-LAST:event_loginBtnActionPerformed
 
@@ -172,6 +146,15 @@ public class LoginDialog extends javax.swing.JDialog {
         SignUpDialog signUp = new SignUpDialog((java.awt.Frame) this.getParent(), true); // 'this' es el frame actual como padre
         signUp.setVisible(true); // Muestra el diálogo de registro
     }//GEN-LAST:event_signUpBtnActionPerformed
+
+    private void passCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passCheckboxActionPerformed
+        // TODO add your handling code here:
+        if (passCheckbox.isSelected()) {
+            passField.setEchoChar((char) 0); // Mostrar contraseña
+        } else {
+            passField.setEchoChar('*'); // Ocultar contraseña
+        }
+    }//GEN-LAST:event_passCheckboxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,26 +173,19 @@ public class LoginDialog extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the dialog */
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            LoginDialog dialog = new LoginDialog(new javax.swing.JFrame(), true);
-            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                @Override
-                public void windowClosing(java.awt.event.WindowEvent e) {
-                    System.exit(0);
-                }
-            });
-            dialog.setVisible(true);
+            new LoginFrame().setVisible(true);
         });
     }
 
@@ -224,12 +200,4 @@ public class LoginDialog extends javax.swing.JDialog {
     private javax.swing.JButton signUpBtn;
     private javax.swing.JTextField userField;
     // End of variables declaration//GEN-END:variables
-
-    public Integer getIdLogin() {
-        return idLogin;
-    }
-
-    private void setIdLogin(Integer idLogin) {
-        this.idLogin = idLogin;
-    }
 }
