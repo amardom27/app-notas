@@ -82,7 +82,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        addCategoryBtn.setText("Agregar Categoria");
+        addCategoryBtn.setText("Ver Categorias");
         addCategoryBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addCategoryBtnActionPerformed(evt);
@@ -171,6 +171,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void addCategoryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCategoryBtnActionPerformed
         // TODO add your handling code here:
+        new CategoriesDialog(this, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_addCategoryBtnActionPerformed
 
     /**

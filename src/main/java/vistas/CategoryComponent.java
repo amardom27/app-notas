@@ -88,10 +88,19 @@ public class CategoryComponent extends javax.swing.JPanel {
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         // TODO add your handling code here:
-        CategoriasService.borrarCategoriaPorId(id);
+        int opcion = JOptionPane.showConfirmDialog(
+                null,
+                "¿Deseas borrar la nota definitivamente?",
+                "Confirmación",
+                JOptionPane.YES_NO_OPTION
+        );
+        
+        if (opcion == JOptionPane.YES_OPTION) {
+            CategoriasService.borrarCategoriaPorId(id);
 
-        if (onDeleteCallback != null) {
-            onDeleteCallback.run(); // Trigger reload in dialog
+            if (onDeleteCallback != null) {
+                onDeleteCallback.run(); // Trigger reload in dialog
+            }
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
@@ -102,12 +111,12 @@ public class CategoryComponent extends javax.swing.JPanel {
             Categorias nuevaCat = new Categorias(this.id);
             nuevaCat.setNombre(nuevoNombre);
             CategoriasService.modificarCategoriaPorId(nuevaCat);
+
+            if (onDeleteCallback != null) {
+                onDeleteCallback.run(); // Trigger reload in dialog
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Error nombre de categoria vacio.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        if (onDeleteCallback != null) {
-            onDeleteCallback.run(); // Trigger reload in dialog
         }
     }//GEN-LAST:event_modifyBtnActionPerformed
 

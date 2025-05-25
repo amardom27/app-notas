@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import servicios.CategoriasService;
 
@@ -146,12 +147,18 @@ public class CategoriesDialog extends javax.swing.JDialog {
     private void addCategoryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCategoryBtnActionPerformed
         // TODO add your handling code here:
         String nombre = newCatField.getText();
-        Categorias nuevaCat = new Categorias(nombre);
-        CategoriasService.agregarCategoria(nuevaCat);
-        
-        this.newCatField.setText("");
-        // Recargar las categorias
-        cargarCategorias();
+
+        if (!nombre.isBlank()) {
+            Categorias nuevaCat = new Categorias(nombre);
+            CategoriasService.agregarCategoria(nuevaCat);
+
+            this.newCatField.setText("");
+            // Recargar las categorias
+            cargarCategorias();
+        } else {
+              JOptionPane.showMessageDialog(null, "Error la categoria esta vacia.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_addCategoryBtnActionPerformed
 
     /**
