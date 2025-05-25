@@ -4,9 +4,7 @@
  */
 package vistas;
 
-import entidades.Categorias;
 import entidades.Notas;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -18,19 +16,17 @@ import servicios.NotasService;
  */
 public class NotaComponent extends javax.swing.JPanel {
 
-    private final Integer notaId;
-    private List<Categorias> listaCategorias;
+    private Notas nota;
+    private Runnable modifyNotesCallback;
 
     /**
      * Creates new form ComponenteNota
      *
-     * @param id
-     * @param categorias
+     * @param nota
      */
-    public NotaComponent(Integer id, List<Categorias> categorias) {
+    public NotaComponent(Notas nota) {
         initComponents();
-        this.notaId = id;
-        this.listaCategorias = categorias;
+        this.nota = nota;
     }
 
     /**
@@ -110,15 +106,33 @@ public class NotaComponent extends javax.swing.JPanel {
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         // TODO add your handling code here:
+        int opcion = JOptionPane.showConfirmDialog(
+                null,
+                "¿Deseas borrar la nota definitivamente?",
+                "Confirmación",
+                JOptionPane.YES_NO_OPTION
+        );
+        
+        if (opcion == JOptionPane.YES_OPTION) {
+            NotasService.borrarNotaPorId(this.nota.getIdNota());
+
+            if (modifyNotesCallback != null) {
+                modifyNotesCallback.run(); // Trigger reload in dialog
+            }
+        }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
         String titulo = titleField.getText();
         String contenido = contentField.getText();
-        Notas nuevaNota = new Notas(this.notaId, titulo, contenido);
+        Notas nuevaNota = new Notas(this.nota.getIdNota(), titulo, contenido);
         NotasService.modificarNota(nuevaNota);
         JOptionPane.showMessageDialog(null, "Nota actualizada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+        if (modifyNotesCallback != null) {
+            modifyNotesCallback.run(); // Trigger reload in dialog
+        }
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void categoriesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriesBtnActionPerformed
@@ -149,5 +163,13 @@ public class NotaComponent extends javax.swing.JPanel {
 
     public void setTitleField(JTextField titleField) {
         this.titleField = titleField;
+    }
+
+    public Runnable getModifyNotesCallback() {
+        return modifyNotesCallback;
+    }
+
+    public void setModifyNotesCallback(Runnable modifyNotesCallback) {
+        this.modifyNotesCallback = modifyNotesCallback;
     }
 }

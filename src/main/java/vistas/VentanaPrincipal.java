@@ -38,7 +38,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         List<Notas> notas = NotasService.obtenerNotasPorUsuario(idLogin);
         for (Notas nota : notas) {
-            NotaComponent notaComp = new NotaComponent(nota.getIdNota(), nota.getCategoriasList());
+            NotaComponent notaComp = new NotaComponent(nota);
+            notaComp.setModifyNotesCallback(this::cargarNotas);
             notaComp.setAlignmentX(LEFT_ALIGNMENT);
             notasContainer.add(notaComp);
             notasContainer.add(Box.createRigidArea(new java.awt.Dimension(0, 20)));

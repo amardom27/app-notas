@@ -30,22 +30,31 @@ public class NotasService {
         List<Notas> lista = notasController.findAll();
         return lista;
     }
-    
+
     public static List<Notas> obtenerNotasPorUsuario(Integer id) {
         List<Notas> lista = notasController.findAllByUser(id);
         return lista;
     }
-    
+
     public static void modificarNota(Notas nota) {
         notasController.updateContenido(nota);
     }
-    
+
     public static void agregarNota(Notas nota) {
         try {
             notasController.create(nota);
             JOptionPane.showMessageDialog(null, "Nota creada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } catch (RuntimeException e) {
             JOptionPane.showMessageDialog(null, "Error introduciendo la nota.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public static void borrarNotaPorId(Integer id) {
+        try {
+            notasController.delete(id);
+            JOptionPane.showMessageDialog(null, "Nota borrada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null, "Error borrando la nota.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
