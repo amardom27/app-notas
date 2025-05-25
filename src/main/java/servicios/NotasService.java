@@ -36,8 +36,9 @@ public class NotasService {
         return lista;
     }
 
-    public static void modificarNota(Notas nota) {
-        notasController.updateContenido(nota);
+    public static Notas obtenerNotaPorId(Integer id) {
+        Notas n = notasController.findById(id);
+        return n;
     }
 
     public static void agregarNota(Notas nota) {
@@ -55,6 +56,19 @@ public class NotasService {
             JOptionPane.showMessageDialog(null, "Nota borrada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } catch (RuntimeException e) {
             JOptionPane.showMessageDialog(null, "Error borrando la nota.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public static void modificarNota(Notas nota) {
+        notasController.updateContenido(nota);
+    }
+
+    public static void modificarCategorias(Notas nota, List<Categorias> categorias) {
+        try {
+            notasController.update(nota, categorias);
+            JOptionPane.showMessageDialog(null, "Categorias de la Nota modificadas correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null, "Error modificando las categorias de la Nota.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 

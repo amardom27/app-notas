@@ -137,6 +137,7 @@ public class NotaComponent extends javax.swing.JPanel {
 
     private void categoriesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriesBtnActionPerformed
         // TODO add your handling code here:
+        new CatOfNotesDialog(null, true, nota).setVisible(true);
     }//GEN-LAST:event_categoriesBtnActionPerformed
 
 
