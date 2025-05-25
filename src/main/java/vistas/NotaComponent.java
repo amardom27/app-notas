@@ -8,6 +8,7 @@ import entidades.Categorias;
 import entidades.Notas;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import servicios.NotasService;
 
@@ -42,14 +43,11 @@ public class NotaComponent extends javax.swing.JPanel {
     private void initComponents() {
 
         titleField = new javax.swing.JTextField();
-        contentField = new javax.swing.JTextField();
         saveBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
         categoriesBtn = new javax.swing.JButton();
-
-        titleField.setText("jTextField1");
-
-        contentField.setText("jTextField2");
+        jScrollPane1 = new javax.swing.JScrollPane();
+        contentField = new javax.swing.JTextArea();
 
         saveBtn.setText("Guardar");
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -72,22 +70,26 @@ public class NotaComponent extends javax.swing.JPanel {
             }
         });
 
+        contentField.setColumns(20);
+        contentField.setRows(5);
+        jScrollPane1.setViewportView(contentField);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titleField)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 248, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(titleField, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(0, 243, Short.MAX_VALUE)
                         .addComponent(categoriesBtn)
                         .addGap(18, 18, 18)
                         .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(contentField))
+                        .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -96,8 +98,8 @@ public class NotaComponent extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(titleField, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(contentField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -126,17 +128,18 @@ public class NotaComponent extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton categoriesBtn;
-    private javax.swing.JTextField contentField;
+    private javax.swing.JTextArea contentField;
     private javax.swing.JButton deleteBtn;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton saveBtn;
     private javax.swing.JTextField titleField;
     // End of variables declaration//GEN-END:variables
 
-    public JTextField getContentField() {
+    public JTextArea getContentField() {
         return contentField;
     }
 
-    public void setContentField(JTextField contentField) {
+    public void setContentField(JTextArea contentField) {
         this.contentField = contentField;
     }
 

@@ -132,7 +132,6 @@ public class AddNoteDialog extends javax.swing.JDialog {
         
         if (!title.isBlank() && !desc.isBlank()) {
             Usuarios usuario = UsuariosService.obtenerUsuarioPorId(this.idUsuario);
-            System.out.println(usuario.toString());
             Notas nuevaNota = new Notas(title, desc, usuario);
             NotasService.agregarNota(nuevaNota);
             dispose();
