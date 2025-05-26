@@ -72,8 +72,7 @@
                       <Component id="jLabel1" pref="200" max="32767" attributes="0"/>
                       <Component id="addCategoryBtn" pref="200" max="32767" attributes="0"/>
                       <Component id="addNoteBtn" max="32767" attributes="0"/>
-                      <Component id="signOutBtn" max="32767" attributes="0"/>
-                      <Component id="delUserBtn" max="32767" attributes="0"/>
+                      <Component id="profileBtn" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
@@ -82,17 +81,15 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="addNoteBtn" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="addCategoryBtn" min="-2" pref="45" max="-2" attributes="0"/>
-                  <EmptySpace pref="220" max="32767" attributes="0"/>
-                  <Component id="signOutBtn" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="delUserBtn" min="-2" pref="45" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                  <Component id="profileBtn" min="-2" pref="45" max="-2" attributes="0"/>
+                  <EmptySpace pref="342" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -120,20 +117,12 @@
             <Property name="text" type="java.lang.String" value="Opciones"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="signOutBtn">
+        <Component class="javax.swing.JButton" name="profileBtn">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cerrar Sesion"/>
+            <Property name="text" type="java.lang.String" value="Ver Perfil"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="signOutBtnActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="delUserBtn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Borrar Usuario"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="delUserBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="profileBtnActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
