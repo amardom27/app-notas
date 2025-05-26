@@ -16,7 +16,7 @@ import servicios.NotasService;
  */
 public class NotaComponent extends javax.swing.JPanel {
 
-    private Notas nota;
+    private final Notas nota;
     private Runnable modifyNotesCallback;
 
     /**
@@ -139,7 +139,7 @@ public class NotaComponent extends javax.swing.JPanel {
 
     private void categoriesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriesBtnActionPerformed
         // TODO add your handling code here:
-        new CatOfNotesDialog(null, true, nota).setVisible(true);
+        new CatOfNotesDialog(null, true, this.nota).setVisible(true);
     }//GEN-LAST:event_categoriesBtnActionPerformed
 
 

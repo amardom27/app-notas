@@ -132,6 +132,26 @@ public class NotasController {
                 throw new IllegalArgumentException("Nota no encontrada con ID: " + nota.getIdNota());
             }
 
+            // Cargar las categorías actuales asociadas a la nota
+            notaExistente.getCategoriasList().size(); // Forzar inicialización si es LAZY
+            List<Categorias> categoriasAnteriores = notaExistente.getCategoriasList();
+
+            // Eliminar la nota de las categorías que ya no están
+            for (Categorias cat : categoriasAnteriores) {
+                if (!nuevasCategorias.contains(cat)) {
+                    cat = em.merge(cat); // asegurar que esté gestionada
+                    cat.getNotasList().remove(notaExistente);
+                }
+            }
+
+            // Agregar la nota a las nuevas categorías si no estaban ya
+            for (Categorias nuevaCat : nuevasCategorias) {
+                nuevaCat = em.merge(nuevaCat); // asegurar que esté gestionada
+                if (!nuevaCat.getNotasList().contains(notaExistente)) {
+                    nuevaCat.getNotasList().add(notaExistente);
+                }
+            }
+
             notaExistente.setTitulo(nota.getTitulo());
             notaExistente.setDescripcion(nota.getDescripcion());
             notaExistente.setCategoriasList(nuevasCategorias);

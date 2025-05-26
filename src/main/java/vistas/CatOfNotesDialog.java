@@ -24,7 +24,7 @@ import servicios.NotasService;
 public class CatOfNotesDialog extends javax.swing.JDialog {
 
     private JPanel checkboxPanel;
-    private Notas nota;
+    private final Notas nota;
 
     /**
      * Creates new form CatOfNotesDialog
@@ -35,7 +35,7 @@ public class CatOfNotesDialog extends javax.swing.JDialog {
      */
     public CatOfNotesDialog(java.awt.Frame parent, boolean modal, Notas nota) {
         super(parent, modal);
-        this.nota = nota;
+        this.nota = NotasService.obtenerNotaPorId(nota.getIdNota());
         initComponents();
         setLocationRelativeTo(null);
         addCheckboxesToScrollPane();
@@ -176,7 +176,6 @@ public class CatOfNotesDialog extends javax.swing.JDialog {
     private void confimationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confimationBtnActionPerformed
         // TODO add your handling code here:
         List<Categorias> lista = getSelectedCheckboxes();
-        lista.forEach(System.out::println);
 
         NotasService.modificarCategorias(this.nota, lista);
         dispose();

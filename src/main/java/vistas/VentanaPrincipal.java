@@ -222,7 +222,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
 
         }
-         // Mostrar mensaje de sesión cerrada
+        // Mostrar mensaje de sesión cerrada
         JOptionPane.showMessageDialog(
                 this.loginFrame,
                 "Sesión cerrada con éxito.",
