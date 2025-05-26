@@ -6,7 +6,6 @@ package servicios;
 
 import controladores.UsuariosController;
 import entidades.Usuarios;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,15 +15,6 @@ import javax.swing.JOptionPane;
 public class UsuariosService {
 
     private static final UsuariosController uc = new UsuariosController();
-
-    public static void insertarEjemplo() {
-        var lista = new ArrayList<Usuarios>();
-        lista.add(new Usuarios("pepe", "12345"));
-        lista.add(new Usuarios("antonio", "98765"));
-        for (Usuarios usuario : lista) {
-            uc.create(usuario);
-        }
-    }
 
     public static Usuarios autenticar(String nombreUsuario, String contraseña) {
         Usuarios usuario = uc.findByNombreYContrasena(nombreUsuario, contraseña);

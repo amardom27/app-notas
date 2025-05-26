@@ -2,7 +2,6 @@ package servicios;
 
 import controladores.CategoriasController;
 import entidades.Categorias;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -43,15 +42,6 @@ public class CategoriasService {
             JOptionPane.showMessageDialog(null, "Categoria borrada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } catch (RuntimeException e) {
             JOptionPane.showMessageDialog(null, "Error borrando la categoria.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    public static void insertarEjemplo() {
-        var lista = new ArrayList<Categorias>();
-        lista.add(new Categorias("peliculas"));
-        lista.add(new Categorias("programacion"));
-        for (Categorias categorias : lista) {
-            cc.create(categorias);
         }
     }
 

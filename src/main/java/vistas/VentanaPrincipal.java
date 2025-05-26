@@ -5,6 +5,8 @@
 package vistas;
 
 import entidades.Notas;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -39,12 +41,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void cargarNotas() {
         JPanel notasContainer = new JPanel();
         notasContainer.setLayout(new BoxLayout(notasContainer, BoxLayout.Y_AXIS));
-
+        notasContainer.setBackground(java.awt.Color.LIGHT_GRAY); // optional
+        
         List<Notas> notas = NotasService.obtenerNotasPorUsuario(idLogin);
         for (Notas nota : notas) {
             NotaComponent notaComp = new NotaComponent(nota);
             notaComp.setModifyNotesCallback(this::cargarNotas);
             notaComp.setAlignmentX(LEFT_ALIGNMENT);
+
+            // Establece el ancho máximo fijo, pero deja que la altura se ajuste
+            notaComp.setMaximumSize(new Dimension(726, notaComp.getPreferredSize().height));
+
             notasContainer.add(notaComp);
             notasContainer.add(Box.createRigidArea(new java.awt.Dimension(0, 20)));
 
@@ -73,7 +80,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         signOutBtn = new javax.swing.JButton();
         delUserBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -143,19 +149,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
 
         jScrollPane1.setBackground(java.awt.SystemColor.controlShadow);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 736, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 586, Short.MAX_VALUE)
-        );
-
-        jScrollPane1.setViewportView(jPanel2);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         jLabel2.setText("Notas");
 
@@ -171,7 +165,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(621, 632, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -244,7 +238,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if (option == JOptionPane.YES_OPTION) {
             UsuariosService.borrarUsuario(this.idLogin);
             dispose();
-            
+
             if (this.loginFrame != null) {
                 this.loginFrame.getUserField().setText("");
                 this.loginFrame.getPassField().setText("");
@@ -293,7 +287,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton signOutBtn;
     // End of variables declaration//GEN-END:variables
