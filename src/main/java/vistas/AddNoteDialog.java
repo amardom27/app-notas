@@ -6,6 +6,7 @@ package vistas;
 
 import entidades.Notas;
 import entidades.Usuarios;
+import javax.swing.JOptionPane;
 import servicios.NotasService;
 import servicios.UsuariosService;
 
@@ -155,6 +156,8 @@ public class AddNoteDialog extends javax.swing.JDialog {
             Notas nuevaNota = new Notas(title, desc, usuario);
             NotasService.agregarNota(nuevaNota);
             dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "No se puede añadir una nota vacia.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_addNoteBtnActionPerformed
 

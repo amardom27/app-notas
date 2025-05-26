@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import servicios.CategoriasService;
 import servicios.NotasService;
@@ -175,10 +176,16 @@ public class CatOfNotesDialog extends javax.swing.JDialog {
 
     private void confimationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confimationBtnActionPerformed
         // TODO add your handling code here:
-        List<Categorias> lista = getSelectedCheckboxes();
+        List<Categorias> categorias = CategoriasService.obtenerCategorias();
 
-        NotasService.modificarCategorias(this.nota, lista);
-        dispose();
+        if (!categorias.isEmpty()) {
+            List<Categorias> listaCategorias = getSelectedCheckboxes();
+
+            NotasService.modificarCategorias(this.nota, listaCategorias);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Todavia no se han creado categorias.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_confimationBtnActionPerformed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
