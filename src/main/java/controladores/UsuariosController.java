@@ -1,12 +1,16 @@
 package controladores;
 
+import entidades.Categorias;
+import entidades.Notas;
 import entidades.Usuarios;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import servicios.NotasService;
 
 /**
  *
@@ -140,14 +144,40 @@ public class UsuariosController {
     public void delete(Integer id) {
         EntityManager em = getEntityManager();
         EntityTransaction tx = em.getTransaction();
+
         try {
             tx.begin();
+
             Usuarios usuario = em.find(Usuarios.class, id);
-            if (usuario != null) {
-                em.remove(usuario);
+            if (usuario == null) {
+                throw new IllegalArgumentException("Usuario no encontrado con ID: " + id);
             }
+
+            // Crear una copia de la lista de notas antes del bucle
+            List<Notas> notasDelUsuario = new ArrayList<>(NotasService.obtenerNotasPorUsuario(usuario.getIdUsuario()));
+
+            for (Notas nota : notasDelUsuario) {
+                Notas notaManaged = em.merge(nota);
+
+                // Crear una copia de la lista de categorías antes del bucle
+                List<Categorias> categoriasDeLaNota = new ArrayList<>(notaManaged.getCategoriasList());
+
+                for (Categorias categoria : categoriasDeLaNota) {
+                    categoria.getNotasList().remove(notaManaged); // actualizar lado inverso
+                }
+
+                notaManaged.getCategoriasList().clear(); // limpiar lista de categorías
+
+                notaManaged.setUsuario(null); // romper relación con el usuario
+                em.merge(notaManaged);        // sincronizar cambio
+
+                em.remove(notaManaged);       // eliminar nota
+            }
+
+            em.remove(usuario); // ahora que no hay notas asociadas, puedes eliminar el usuario
+
             tx.commit();
-        } catch (Exception ex) {
+        } catch (IllegalArgumentException ex) {
             if (tx.isActive()) {
                 tx.rollback();
             }
@@ -157,6 +187,30 @@ public class UsuariosController {
         }
     }
 
+    /**
+     * Elimina un usuario de la base de datos.
+     *
+     * @param id El ID del usuario a eliminar.
+     */
+//    public void delete(Integer id) {
+//        EntityManager em = getEntityManager();
+//        EntityTransaction tx = em.getTransaction();
+//        try {
+//            tx.begin();
+//            Usuarios usuario = em.find(Usuarios.class, id);
+//            if (usuario != null) {
+//                em.remove(usuario);
+//            }
+//            tx.commit();
+//        } catch (Exception ex) {
+//            if (tx.isActive()) {
+//                tx.rollback();
+//            }
+//            throw new RuntimeException("Error al eliminar el usuario", ex);
+//        } finally {
+//            em.close();
+//        }
+//    }
     /**
      * Elimina todos los usuarios de la base de datos y reinicia el
      * autoincremento.

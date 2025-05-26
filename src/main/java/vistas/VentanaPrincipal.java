@@ -11,6 +11,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import servicios.NotasService;
+import servicios.UsuariosService;
 
 /**
  *
@@ -220,12 +221,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 this.loginFrame.getPassField().setText("");
                 this.loginFrame.setVisible(true);
             }
-
         }
         // Mostrar mensaje de sesión cerrada
         JOptionPane.showMessageDialog(
                 this.loginFrame,
-                "Sesión cerrada con éxito.",
+                "Sesión cerrada correctamente.",
                 "Cierre de sesión",
                 JOptionPane.INFORMATION_MESSAGE
         );
@@ -233,6 +233,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void delUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delUserBtnActionPerformed
         // TODO add your handling code here:
+        int option = JOptionPane.showConfirmDialog(
+                this,
+                "¿Estás seguro de que borrar la cuenta?",
+                "Confirmar cierre de sesión",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+        );
+
+        if (option == JOptionPane.YES_OPTION) {
+            UsuariosService.borrarUsuario(this.idLogin);
+            dispose();
+            
+            if (this.loginFrame != null) {
+                this.loginFrame.getUserField().setText("");
+                this.loginFrame.getPassField().setText("");
+                this.loginFrame.setVisible(true);
+            }
+        }
     }//GEN-LAST:event_delUserBtnActionPerformed
 
     /**

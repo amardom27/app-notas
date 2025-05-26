@@ -39,8 +39,17 @@ public class UsuariosService {
             JOptionPane.showMessageDialog(null, "Error introduciendo al usuario.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public static Usuarios obtenerUsuarioPorId(Integer id) {
         return uc.findById(id);
+    }
+
+    public static void borrarUsuario(Integer id) {
+        try {
+            uc.delete(id);
+            JOptionPane.showMessageDialog(null, "Usuario borrado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null, "Error borrando al usuario.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
