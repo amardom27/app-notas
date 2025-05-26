@@ -42,4 +42,13 @@ public class UsuariosService {
             JOptionPane.showMessageDialog(null, "Error borrando al usuario.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    public static void modificarUsuario(Usuarios usuario) {
+        try {
+            uc.update(usuario);
+            JOptionPane.showMessageDialog(null, "Usuario modificado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null, "Error modificando el usuario.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

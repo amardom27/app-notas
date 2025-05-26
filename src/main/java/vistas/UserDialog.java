@@ -4,6 +4,7 @@
  */
 package vistas;
 
+import entidades.Usuarios;
 import javax.swing.JOptionPane;
 import servicios.UsuariosService;
 
@@ -13,8 +14,8 @@ import servicios.UsuariosService;
  */
 public class UserDialog extends javax.swing.JDialog {
 
-    private Runnable onSignOutCallback;
-    private Integer idUsuario;
+    private final Runnable onSignOutCallback;
+    private final Integer idUsuario;
 
     /**
      * Creates new form UserDialog
@@ -22,12 +23,23 @@ public class UserDialog extends javax.swing.JDialog {
      * @param parent
      * @param modal
      * @param callback
+     * @param id
      */
     public UserDialog(java.awt.Frame parent, boolean modal, Runnable callback, Integer id) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         this.onSignOutCallback = callback;
         this.idUsuario = id;
+
+        cargarDatos();
+    }
+
+    private void cargarDatos() {
+        Usuarios usuario = UsuariosService.obtenerUsuarioPorId(this.idUsuario);
+        this.nomUserField.setText(usuario.getNomUsuario());
+        this.passField.setText(usuario.getPassUsuario());
+        this.confirmationField.setText(usuario.getPassUsuario());
     }
 
     /**
@@ -43,6 +55,7 @@ public class UserDialog extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         signOutBtn = new javax.swing.JButton();
         deleteAccBtn = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         nomUserField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -50,7 +63,7 @@ public class UserDialog extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         passField = new javax.swing.JPasswordField();
         confirmationField = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        modifyUserBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -73,6 +86,13 @@ public class UserDialog extends javax.swing.JDialog {
             }
         });
 
+        backBtn.setText("Volver");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -82,19 +102,22 @@ public class UserDialog extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(signOutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(deleteAccBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                    .addComponent(deleteAccBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(backBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(65, 65, 65)
+                .addGap(51, 51, 51)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(45, 45, 45)
                 .addComponent(signOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGap(18, 18, 18)
+                .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(deleteAccBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(48, 48, 48))
         );
 
         jLabel1.setText("Datos del Usuario");
@@ -105,7 +128,12 @@ public class UserDialog extends javax.swing.JDialog {
 
         jLabel4.setText("Confirmacion");
 
-        jButton1.setText("Modificar Usuario");
+        modifyUserBtn.setText("Modificar Usuario");
+        modifyUserBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modifyUserBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,7 +150,7 @@ public class UserDialog extends javax.swing.JDialog {
                     .addComponent(jLabel4)
                     .addComponent(passField)
                     .addComponent(confirmationField)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))
+                    .addComponent(modifyUserBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))
                 .addGap(157, 157, 157))
         );
         layout.setVerticalGroup(
@@ -144,7 +172,7 @@ public class UserDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(confirmationField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(86, 86, 86)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(modifyUserBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(94, Short.MAX_VALUE))
         );
 
@@ -177,7 +205,7 @@ public class UserDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
         int option = JOptionPane.showConfirmDialog(
                 this,
-                "¿Estás seguro de que borrar la cuenta?",
+                "¿Estás seguro de que deseas borrar la cuenta?",
                 "Confirmar cierre de sesión",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE
@@ -188,6 +216,37 @@ public class UserDialog extends javax.swing.JDialog {
             this.onSignOutCallback.run();
         }
     }//GEN-LAST:event_deleteAccBtnActionPerformed
+
+    private void modifyUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyUserBtnActionPerformed
+        // TODO add your handling code here:
+        int option = JOptionPane.showConfirmDialog(
+                this,
+                "¿Estás seguro de que deseas modificar el usuario?",
+                "Confirmar cierre de sesión",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+        );
+        if (option == JOptionPane.YES_OPTION) {
+            String nombre = this.nomUserField.getText();
+            String pass = String.valueOf(passField.getPassword());
+            String confimartion = String.valueOf(confirmationField.getPassword());
+
+            if (!nombre.isBlank() && !pass.isBlank() && !confimartion.isBlank() && pass.equals(confimartion)) {
+                Usuarios nuevoUsuario = new Usuarios(this.idUsuario, nombre, pass);
+                UsuariosService.modificarUsuario(nuevoUsuario);
+                
+                // Refrescar los datos
+                cargarDatos();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error introduciendo los datos.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_modifyUserBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,15 +289,16 @@ public class UserDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backBtn;
     private javax.swing.JPasswordField confirmationField;
     private javax.swing.JButton deleteAccBtn;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton modifyUserBtn;
     private javax.swing.JTextField nomUserField;
     private javax.swing.JPasswordField passField;
     private javax.swing.JButton signOutBtn;

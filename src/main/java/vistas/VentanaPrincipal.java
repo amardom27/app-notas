@@ -5,15 +5,12 @@
 package vistas;
 
 import entidades.Notas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import servicios.NotasService;
-import servicios.UsuariosService;
 
 /**
  *
