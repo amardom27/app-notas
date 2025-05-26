@@ -30,10 +30,15 @@
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel2" min="-2" pref="100" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="715" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel2" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace min="621" pref="632" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -67,6 +72,8 @@
                       <Component id="jLabel1" pref="200" max="32767" attributes="0"/>
                       <Component id="addCategoryBtn" pref="200" max="32767" attributes="0"/>
                       <Component id="addNoteBtn" max="32767" attributes="0"/>
+                      <Component id="signOutBtn" max="32767" attributes="0"/>
+                      <Component id="delUserBtn" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
@@ -81,7 +88,11 @@
                   <Component id="addNoteBtn" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="addCategoryBtn" min="-2" pref="45" max="-2" attributes="0"/>
-                  <EmptySpace pref="377" max="32767" attributes="0"/>
+                  <EmptySpace pref="220" max="32767" attributes="0"/>
+                  <Component id="signOutBtn" min="-2" pref="45" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="delUserBtn" min="-2" pref="45" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -108,6 +119,22 @@
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Opciones"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="signOutBtn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cerrar Sesion"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="signOutBtnActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="delUserBtn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Borrar Usuario"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="delUserBtnActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

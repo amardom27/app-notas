@@ -6,6 +6,8 @@ package vistas;
 
 import entidades.Usuarios;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import servicios.UsuariosService;
 
 /**
@@ -137,7 +139,7 @@ public class LoginFrame extends javax.swing.JFrame {
         if (usuarioLogin == null) {
             JOptionPane.showMessageDialog(null, "El usuario es incorrecto.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            new VentanaPrincipal(usuarioLogin.getIdUsuario()).setVisible(true);
+            new VentanaPrincipal(usuarioLogin.getIdUsuario(), this).setVisible(true);
         }
     }//GEN-LAST:event_loginBtnActionPerformed
 
@@ -200,4 +202,20 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JButton signUpBtn;
     private javax.swing.JTextField userField;
     // End of variables declaration//GEN-END:variables
+
+    public JPasswordField getPassField() {
+        return passField;
+    }
+
+    public void setPassField(JPasswordField passField) {
+        this.passField = passField;
+    }
+
+    public JTextField getUserField() {
+        return userField;
+    }
+
+    public void setUserField(JTextField userField) {
+        this.userField = userField;
+    }
 }

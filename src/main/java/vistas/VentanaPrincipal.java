@@ -8,6 +8,7 @@ import entidades.Notas;
 import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import servicios.NotasService;
 
@@ -18,23 +19,25 @@ import servicios.NotasService;
 public class VentanaPrincipal extends javax.swing.JFrame {
 
     private final Integer idLogin;
+    private final LoginFrame loginFrame;
 
     /**
      * Creates new form VentanaPrincipal
      *
      * @param id
+     * @param loginFrame
      */
-    public VentanaPrincipal(Integer id) {
+    public VentanaPrincipal(Integer id, LoginFrame loginFrame) {
         initComponents();
         setLocationRelativeTo(null);
         this.idLogin = id;
+        this.loginFrame = loginFrame;
         cargarNotas();
     }
 
     private void cargarNotas() {
         JPanel notasContainer = new JPanel();
         notasContainer.setLayout(new BoxLayout(notasContainer, BoxLayout.Y_AXIS));
-        notasContainer.setBackground(java.awt.Color.GRAY); // opcional
 
         List<Notas> notas = NotasService.obtenerNotasPorUsuario(idLogin);
         for (Notas nota : notas) {
@@ -66,6 +69,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         addNoteBtn = new javax.swing.JButton();
         addCategoryBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        signOutBtn = new javax.swing.JButton();
+        delUserBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -92,6 +97,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Opciones");
 
+        signOutBtn.setText("Cerrar Sesion");
+        signOutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signOutBtnActionPerformed(evt);
+            }
+        });
+
+        delUserBtn.setText("Borrar Usuario");
+        delUserBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delUserBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -101,7 +120,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                     .addComponent(addCategoryBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(addNoteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(addNoteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(signOutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(delUserBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(22, 22, 22))
         );
         jPanel1Layout.setVerticalGroup(
@@ -113,7 +134,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(addNoteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(addCategoryBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(377, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 220, Short.MAX_VALUE)
+                .addComponent(signOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(delUserBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49))
         );
 
         jScrollPane1.setBackground(java.awt.SystemColor.controlShadow);
@@ -141,9 +166,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 715, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(621, 632, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,6 +202,39 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         new CategoriesDialog(this, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_addCategoryBtnActionPerformed
 
+    private void signOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signOutBtnActionPerformed
+        // TODO add your handling code here:
+        int option = JOptionPane.showConfirmDialog(
+                this,
+                "¿Estás seguro de que deseas cerrar sesión?",
+                "Confirmar cierre de sesión",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+        );
+
+        if (option == JOptionPane.YES_OPTION) {
+            this.dispose();
+
+            if (this.loginFrame != null) {
+                this.loginFrame.getUserField().setText("");
+                this.loginFrame.getPassField().setText("");
+                this.loginFrame.setVisible(true);
+            }
+
+        }
+         // Mostrar mensaje de sesión cerrada
+        JOptionPane.showMessageDialog(
+                this.loginFrame,
+                "Sesión cerrada con éxito.",
+                "Cierre de sesión",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    }//GEN-LAST:event_signOutBtnActionPerformed
+
+    private void delUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delUserBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_delUserBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -203,17 +264,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new VentanaPrincipal(1).setVisible(true);
+            new VentanaPrincipal(1, null).setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addCategoryBtn;
     private javax.swing.JButton addNoteBtn;
+    private javax.swing.JButton delUserBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton signOutBtn;
     // End of variables declaration//GEN-END:variables
 }

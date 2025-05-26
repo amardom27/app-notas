@@ -45,6 +45,8 @@ public class NotaComponent extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         contentField = new javax.swing.JTextArea();
 
+        setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.SystemColor.controlShadow, 2));
+
         saveBtn.setText("Guardar");
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,7 +82,7 @@ public class NotaComponent extends javax.swing.JPanel {
                     .addComponent(jScrollPane1)
                     .addComponent(titleField, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(0, 243, Short.MAX_VALUE)
+                        .addGap(0, 224, Short.MAX_VALUE)
                         .addComponent(categoriesBtn)
                         .addGap(18, 18, 18)
                         .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)

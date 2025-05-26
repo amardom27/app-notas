@@ -3,8 +3,7 @@
  */
 package daw;
 
-import vistas.LoginDialog;
-import vistas.VentanaPrincipal;
+import vistas.LoginFrame;
 
 /**
  *
@@ -14,14 +13,7 @@ public class AppNotas {
 
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(() -> {
-            LoginDialog login = new LoginDialog(null, true);
-            login.setVisible(true); // bloquea hasta que el login se cierre
-
-            if (login.isLoginExitoso()) {
-                new VentanaPrincipal(login.getIdLogin()).setVisible(true);
-            } else {
-                System.exit(0); // o simplemente no haces nada
-            }
+            new LoginFrame().setVisible(true);
         });
     }
 }
