@@ -9,8 +9,8 @@ use BDnotas;
 drop table if exists usuarios;
 create table usuarios(
 	idUsuario int auto_increment,
-    nomUsuario varchar(15) not null unique,
-    passUsuario varchar(15) not null,
+    nomUsuario varchar(20) not null unique,
+    passUsuario varchar(20) not null,
     constraint pk_usuarios primary key (idUsuario)
 );
 
@@ -18,8 +18,8 @@ create table usuarios(
 drop table if exists notas;
 create table notas(
 	idNota int auto_increment,
-    titulo varchar(20),
-    descripcion varchar(80),
+    titulo varchar(50),
+    descripcion varchar(255),
     fechaCreacion date,
     idUsuario int,
     constraint pk_notas primary key (idNota),
@@ -31,7 +31,7 @@ create table notas(
 drop table if exists categorias;
 create table categorias(
 	idCategoria int auto_increment,
-    nombre varchar(20) unique,
+    nombre varchar(30) unique,
     constraint pk_categorias primary key (idCategoria)
 );
 

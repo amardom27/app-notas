@@ -147,6 +147,8 @@ public class LoginFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         SignUpDialog signUp = new SignUpDialog((java.awt.Frame) this.getParent(), true); // 'this' es el frame actual como padre
         signUp.setVisible(true); // Muestra el diálogo de registro
+        this.userField.setText("");
+        this.passField.setText("");
     }//GEN-LAST:event_signUpBtnActionPerformed
 
     private void passCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passCheckboxActionPerformed
